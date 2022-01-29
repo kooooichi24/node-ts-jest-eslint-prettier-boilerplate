@@ -8,7 +8,7 @@
     "check-types": "tsc --noEmit",
     "eslint": "eslint '*/**/*.{js,ts}' --quiet",
     "lint": "run-s eslint check-types",
-    "lint:fix": "run-s format lint",
+    "lint:fix": "run-s lint format",
     "test:unit": "jest"
   },
   "author": "",
