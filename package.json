@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check-types": "tsc --noEmit",
+    "eslint": "eslint '*/**/*.{js,ts}' --quiet",
+    "lint": "run-s eslint check-types"
   },
   "author": "",
   "license": "ISC",
