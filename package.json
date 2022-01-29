@@ -6,7 +6,8 @@
   "scripts": {
     "check-types": "tsc --noEmit",
     "eslint": "eslint '*/**/*.{js,ts}' --quiet",
-    "lint": "run-s eslint check-types"
+    "lint": "run-s eslint check-types",
+    "test:unit": "jest"
   },
   "author": "",
   "license": "ISC",
