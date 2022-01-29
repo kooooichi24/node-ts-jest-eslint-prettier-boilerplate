@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --write .",
     "check-types": "tsc --noEmit",
     "eslint": "eslint '*/**/*.{js,ts}' --quiet",
     "lint": "run-s eslint check-types",
+    "lint:fix": "run-s format lint",
     "test:unit": "jest"
   },
   "author": "",
