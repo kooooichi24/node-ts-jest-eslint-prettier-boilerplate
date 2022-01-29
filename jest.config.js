@@ -19,4 +19,16 @@ module.exports = {
   ],
   coverageDirectory: "./coverage",
   coverageReporters: ["lcov", "text", "text-summary"],
+  reporters: [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        publicPath: "./test-report",
+        outputPath: "./test-report",
+        filename: "report.html",
+        pageTitle: "Test Report",
+      },
+    ],
+  ],
 };
