@@ -50,5 +50,8 @@ npm run lint:fix
 
 * Github: [@kooooichi24](https://github.com/kooooichi24)
 
+## How to create this template project
+[こちら](./CreationProcedure.md)に記載
+
 ## License
 MIT
