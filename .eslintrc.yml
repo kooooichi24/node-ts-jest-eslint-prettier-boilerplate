@@ -6,11 +6,14 @@ env:
 parser: "@typescript-eslint/parser"
 parserOptions:
   sourceType: "module"
-  ecmaVersion: 2020,
+  ecmaVersion: 2020
+  project: "./tsconfig.json"
 plugins:
   - jest
   - "@typescript-eslint"
 extends:
+  - "airbnb-base"
+  - "airbnb-typescript/base"
   - "eslint:recommended"
   - "plugin:@typescript-eslint/recommended"
   - "plugin:jest/recommended"
