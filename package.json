@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "format": "prettier --write .",
     "check-types": "tsc --noEmit",
-    "eslint": "eslint '*/**/*.{js,ts}' --quiet",
+    "eslint": "eslint '*/**/*.{js,ts}'",
     "lint": "run-s eslint check-types",
     "lint:fix": "run-s lint format",
     "test:unit": "jest",
