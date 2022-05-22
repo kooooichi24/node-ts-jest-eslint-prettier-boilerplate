@@ -4,16 +4,20 @@
 
 ## 手順
 
-### 1. git初期化
+### 1. git 初期化
+
 ```
 git init
 ```
+
 #### .gitignore の作成
+
 ```sh
 touch .gitignore
 ```
 
 下記を設定 (必要に応じて修正してください)
+
 ```
 node_modules/
 dist/
@@ -22,22 +26,27 @@ test-report/
 ```
 
 ### 2. package.json の作成
+
 ```sh
 npm init
 ```
 
 ### 3. TypeScript の設定
+
 #### パッケージのインストール
+
 ```sh
 npm i -D typescript @types/node
 ```
 
 #### Typescript から Javascript へコンパイルする際の、設定ファイル(tsconfig)の作成
+
 ```sh
 npx tsc --init
 ```
 
 #### tsconfig.json の修正
+
 ```json
 {
   "compilerOptions": {
@@ -58,23 +67,21 @@ npx tsc --init
     "noUnusedParameters": true,
     "skipLibCheck": true
   },
-  "include": [
-    "src/**/*.ts",
-    "__tests__/**/*",
-  ],
-  "exclude": [
-    "dist/**/*",
-    "node_modules/**/*",
-  ]
+  "include": ["src/**/*.ts", "__tests__/**/*"],
+  "exclude": ["dist/**/*", "node_modules/**/*"]
 }
 ```
+
 下記を参考にした
-- [すべてのTSConfigのオプションのドキュメント - TypeScript](https://www.typescriptlang.org/ja/tsconfig)
+
+- [すべての TSConfig のオプションのドキュメント - TypeScript](https://www.typescriptlang.org/ja/tsconfig)
 - [tsconfig.json - TypeScript Deep Dive 日本語版について](https://typescript-jp.gitbook.io/deep-dive/project/compilation-context/tsconfig)
-- [tsconfig.jsonを設定する - サバイバルTypeScript](https://typescriptbook.jp/reference/tsconfig/tsconfig.json-settings)
+- [tsconfig.json を設定する - サバイバル TypeScript](https://typescriptbook.jp/reference/tsconfig/tsconfig.json-settings)
 
 ### 4. ESLint の設定
-#### typescriptにlintを導入するために、eslintのライブラリを導入
+
+#### typescript に lint を導入するために、eslint のライブラリを導入
+
 [TypeScript ESLint](https://typescript-eslint.io/) の [Getting Start](https://typescript-eslint.io/docs/linting/) を参考にする
 
 ```sh
@@ -82,11 +89,13 @@ npm i -D eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-p
 ```
 
 #### .eslintrc.yml の作成
+
 ```sh
 touch .eslintrc.yml
 ```
 
 下記を設定
+
 ```yml
 root: true
 env:
@@ -104,11 +113,13 @@ extends:
 ```
 
 #### .eslintignore の作成
+
 ```sh
 touch .eslintignore
 ```
 
 下記を設定
+
 ```
 node_modules/**/*
 dist
@@ -117,13 +128,16 @@ test-report
 ```
 
 #### npm script の作成
+
 lint 対象のサンプルプログラムの作成
+
 ```
 src
 └── index.ts
 ```
 
 サンプルコード (index.ts)
+
 ```ts
 function hello(name: string): string {
   return `Hello, ${name}!`;
@@ -131,13 +145,14 @@ function hello(name: string): string {
 console.log(hello("TypeScript"));
 ```
 
-
 複数の npm-scripts を実行するために、npm-run-all ライブラリを導入
+
 ```sh
 npm i -D npm-run-all
 ```
 
-lint実行するためのnpm script を追加
+lint 実行するための npm script を追加
+
 ```diff
 {
   ...
@@ -152,24 +167,31 @@ lint実行するためのnpm script を追加
 ```
 
 ### 5. Prettier の設定
+
 #### formatter を利用するために、 Prettier の導入
+
 [prettier](https://github.com/prettier/prettier) の [Install - Prettier](https://prettier.io/docs/en/install.html) を参考にする
+
 ```sh
-npm i -D --save-exact prettier 
+npm i -D --save-exact prettier
 ```
 
 #### Prettier の設定ファイル作成
+
 デフォルトの設定を利用するため、設定ファイルのみ作成
+
 ```sh
 touch .prettierrc.yml
 ```
 
-Prettierの対象外ファイルの作成
+Prettier の対象外ファイルの作成
+
 ```sh
 touch .prettierignore
 ```
 
 .prettierignore に下記を設定
+
 ```
 # Ignore artifacts:
 /dist
@@ -180,14 +202,17 @@ tsconfig.json
 ```
 
 #### eslint-config-prettier の導入
+
 [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) の [Installation](https://github.com/prettier/eslint-config-prettier#installation) を参考にする
 
 eslint-config-prettier のインストール
+
 ```sh
 npm i -D --save-exact eslint-config-prettier
 ```
 
-ESLint と Prettier が競合するため、ESLint 側のフォーマットルールをOFFにする設定の追加
+ESLint と Prettier が競合するため、ESLint 側のフォーマットルールを OFF にする設定の追加
+
 ```diff
 root: true
 env:
@@ -205,7 +230,8 @@ extends:
 + - "prettier"
 ```
 
-#### format用のnpm scriptを追加
+#### format 用の npm script を追加
+
 ```diff
 {
   ...
@@ -222,7 +248,9 @@ extends:
 ```
 
 ### 6. Jest の設定
+
 #### Jest の導入
+
 [TypeScript Deep Dive 日本語版](https://typescript-jp.gitbook.io) の [Jest](https://typescript-jp.gitbook.io/deep-dive/intro-1/jest) を参考にする
 
 ```sh
@@ -230,11 +258,13 @@ npm i -D jest @types/jest ts-jest
 ```
 
 #### Jest の設定ファイル追加
+
 ```sh
 touch jest.config.js
 ```
 
 下記を設定
+
 ```js
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
@@ -260,7 +290,8 @@ module.exports = {
 };
 ```
 
-#### vscodeでサブディレクトリ配下のtestファイルで、名前解決できないため、tsconfigの設定を変更
+#### vscode でサブディレクトリ配下の test ファイルで、名前解決できないため、tsconfig の設定を変更
+
 - エラー事象
   - VSCode 上で、下記エラーが発生するケースがあった
     > Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i @types/jest` or `npm i @types/mocha`.ts(2582)
@@ -294,10 +325,11 @@ module.exports = {
       + }
       ```
 - 参考記事
-  - [vscodeでワークスペースをrootで開いた際、サブディレクトリのjestモジュールが読み込まれない問題の解決方法](https://zenn.dev/nananaoto/articles/f96faba43c59255db91f)
+  - [vscode でワークスペースを root で開いた際、サブディレクトリの jest モジュールが読み込まれない問題の解決方法](https://zenn.dev/nananaoto/articles/f96faba43c59255db91f)
   - [How to exclude specific files in typescript only for the build?](https://stackoverflow.com/questions/58461649/how-to-exclude-specific-files-in-typescript-only-for-the-build/58461810#58461810)
 
-#### jest実行用のnpm scriptの追加
+#### jest 実行用の npm script の追加
+
 ```diff
 {
   ...
@@ -315,6 +347,7 @@ module.exports = {
 ```
 
 #### jest 実行
+
 `jest.config.js` で設定した coverage も含めて実行されていることを確認
 
 ```sh
@@ -327,10 +360,10 @@ $ npm run test:unit
   ✓ 正常系 (1 ms)
 
 ----------|---------|----------|---------|---------|-------------------
-File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
 ----------|---------|----------|---------|---------|-------------------
-All files |       0 |      100 |       0 |       0 |                   
- index.ts |       0 |      100 |       0 |       0 | 2-4               
+All files |       0 |      100 |       0 |       0 |
+ index.ts |       0 |      100 |       0 |       0 | 2-4
 ----------|---------|----------|---------|---------|-------------------
 
 =============================== Coverage summary ===============================
@@ -346,12 +379,14 @@ Time:        2.035 s
 Ran all test suites.
 ```
 
-#### テストレポートを確認するために、jest-html-reportersを導入
+#### テストレポートを確認するために、jest-html-reporters を導入
+
 ```sh
 npm i -D jest-html-reporters
 ```
 
 `jest.config.js` の修正
+
 ```diff
 module.exports = {
   moduleFileExtensions: ["ts", "js"],
@@ -388,16 +423,18 @@ module.exports = {
 };
 ```
 
-#### ESLintのJest用の設定を追加
+#### ESLint の Jest 用の設定を追加
+
 [eslint-plugin-jest](https://github.com/jest-community/eslint-plugin-jest) の [Installation](https://github.com/jest-community/eslint-plugin-jest#installation) と [Usage](https://github.com/jest-community/eslint-plugin-jest#usage) を参考にする
 
-
 パッケージインストール
+
 ```sh
 npm i -D eslint-plugin-jest
 ```
 
 `.eslintrc.yml` の修正
+
 ```diff
 root: true
 env:
@@ -419,7 +456,9 @@ extends:
 ```
 
 ### 7. Husky & lint-staged の導入
+
 #### commit 時に自動で ESLint と Prettier を実行するために、 Husky と lint-staged を導入
+
 [lint-staged](https://github.com/okonet/lint-staged) の [Installation and setup](https://github.com/okonet/lint-staged#installation-and-setup) と [husky](https://github.com/typicode/husky) の [Usage](https://github.com/typicode/husky#usage) を参考にする
 
 ```sh
@@ -427,7 +466,9 @@ npx mrm@2 lint-staged
 ```
 
 #### lint-staged の設定修正
+
 js もしくは ts がコミットされたら、lint と format を実行するように修正した
+
 ```diff
 {
   ...
@@ -452,6 +493,7 @@ js もしくは ts がコミットされたら、lint と format を実行する
 ```
 
 #### push 前に自動でテストを実行させるように、Husky を修正
+
 ```sh
 .husky
 ├── _
@@ -461,14 +503,16 @@ js もしくは ts がコミットされたら、lint と format を実行する
 ```
 
 pre-push の設定を追加
+
 ```diff
 + #!/bin/sh
 + . "$(dirname "$0")/_/husky.sh"
-+ 
++
 + npm run test:unit
 ```
 
 ## 参考資料
-- [TypeScript + Node.js プロジェクトのはじめかた2020](https://qiita.com/notakaos/items/3bbd2293e2ff286d9f49#tsconfigjson-%E7%94%9F%E6%88%90)
-- [TypeScript + Node.jsプロジェクトにESLint + Prettierを導入する手順2020](https://qiita.com/notakaos/items/85fd2f5c549f247585b1)
+
+- [TypeScript + Node.js プロジェクトのはじめかた 2020](https://qiita.com/notakaos/items/3bbd2293e2ff286d9f49#tsconfigjson-%E7%94%9F%E6%88%90)
+- [TypeScript + Node.js プロジェクトに ESLint + Prettier を導入する手順 2020](https://qiita.com/notakaos/items/85fd2f5c549f247585b1)
 - [決定版！イマドキの ESLint 設定！](https://dev.classmethod.jp/articles/eslint-configurations-2020/)
